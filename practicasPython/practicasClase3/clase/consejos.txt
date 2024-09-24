@@ -1,0 +1,2 @@
+Atajo para ejecutar una selección de líneas
+    ALT + SHIFT + ENTER
