@@ -1,7 +1,7 @@
 # Saludando
 
 print("\n")
-nombre = input("Ingresá tu nombre: ")
+nombre = str(input("Ingresá tu nombre: "))
 print("\n")
 print("¡Hola, ", nombre,"!", sep="")
 print("\n")
