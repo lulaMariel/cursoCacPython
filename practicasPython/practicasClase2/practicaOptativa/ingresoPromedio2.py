@@ -9,9 +9,9 @@ jun = 2000
 
 # Leyenda de ingresos
 
-print()
+print("\n")
 print("Los ingresos obtenidos mes a mes: ")
-print()
+print("\n")
 print("Enero:", ene, "\nFebrero:", feb, "\nMarzo:", mar, "\nAbril:", abr, "\nMarzo:", mar, "\nMayo:", may, "\nJunio:", jun)
 
 # Suma semestre
@@ -25,7 +25,7 @@ promedioSemestre = sumaSemestre / 6
 
 # Leyendas a mostrar
 
-print()
+print("\n")
 print("Los ingresos obtenidos el primer semestre es de: ", sumaSemestre)
-print()
+print("\n")
 print("El promedio de los ingresos obtenidos el primer semestre es de: ", int(promedioSemestre))

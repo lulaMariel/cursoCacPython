@@ -15,7 +15,7 @@ int(flotante)
 nombre = "Lula"
 edad = 21
 
-print()
+print("\n")
 print(type(nombre))
 print(type(edad))
 print(type(flotante))

@@ -1,5 +1,5 @@
 print("Lista de Compras - Supermercado")
-print()
+print("\n")
 print("Producto \tCantidad")
 print("Gaseosas \t2")
 print("Serenitos \t6")

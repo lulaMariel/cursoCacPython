@@ -1,15 +1,15 @@
 # Saludando
 
-print()
+print("\n")
 nombre = input("Ingresá tu nombre: ")
-print()
+print("\n")
 print("¡Hola, ", nombre,"!", sep="")
 
 # Explicando conceptos y solicitando números
 
-print()
+print("\n")
 print("Para este ejercicio, los números que ingreses deben ser exclusivamente enteros.")
-print()
+print("\n")
 num1 = int(input("Ingresá el primer número: "))
 num2 = int(input("Ingresá el segundo número: "))
 
@@ -25,16 +25,16 @@ modulo = num1 % num2
 
 # Leyendas de resultados
 
-print()
+print("\n")
 print("Ahora, con los números ingresados, procederemos a realizar los cálculos correspondientes a: Suma, resta, multiplicación y módulo.")
-print()
+print("\n")
 
 print("Operador \t\tResultado")
-print()
+print("\n")
 print("Suma: \t\t\t", suma, sep="")
-print()
+print("\n")
 print("Resta: \t\t\t", resta, sep="")
-print()
+print("\n")
 print("Multiplicación: \t", multiplo, sep="")
-print()
+print("\n")
 print("Módulo: \t\t", modulo, sep="")

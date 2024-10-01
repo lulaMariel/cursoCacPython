@@ -6,7 +6,7 @@ b = 60
 promedio = (a + b) / 2
 
 print(nombre)
-print()
+print("\n")
 print("Estas son tus notas: ")
 print("Nota 1: ", a)
 print("Nota 2: ", b)
