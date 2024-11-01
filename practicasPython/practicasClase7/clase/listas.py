@@ -17,7 +17,7 @@ print("\n")
 
 # Modificaciones
 
-lista[0] = "Yogurt" # Cambia el primer elemento, es decir, "Leche" por "Yogurt"
+lista[0] = "Yogurt" # Modifica un elemento de la lista. Cambia el primer elemento, es decir, "Leche" por "Yogurt"
 print(lista[0]) # Muestra el nuevo elemento del índice
 print("\n")
 
@@ -36,6 +36,21 @@ print("\n")
 lista.pop(1) # Borra el elemento que esté en el índice indicado, es decir, borra "Huevos"
 print(lista) # Muestra la lista con el índice borrado
 print("\n")
+
+# Concatenar listas
+
+lista1 = ["Café", "Azúcar", "Agua"]
+lista2 = ["Leche", "Chocolate"]
+
+listaFinal = lista1 + lista2
+print(listaFinal)
+print("\n")
+
+lista1.extend(lista2) # En vez de concatenar con un "+", extiende la lista 1 con el contenido de la lista 2
+
+# Longitud de listas
+
+print(len(lista)) # Muestra el número de elementos que tiene la lista
 
 # Tuplas: 
 
