@@ -1,5 +1,5 @@
 # En esta solución, aprendemos a usar try except.
-# try: Acaba puede haber un posible error. De haberlo, pasa directo al except. Primero verifica si hay erorres y después sigue con el bucle dependiendo de si lo hay o no
+# try: Lo usamos si en el bucle puede haber un posible error. De haberlo, pasa directo al except. Primero verifica si hay erorres y después sigue con el bucle dependiendo de si lo hay o no
 
 # Saludando
 
