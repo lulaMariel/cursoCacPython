@@ -96,5 +96,17 @@ while True: # Iniciamos el bucle principal
                 except ValueError:
                     print("El stock debe ser cargado en números enteros, por unidades.")
         
+            # Agregar el producto completo a la lista
+            productos.append((nombreProducto, precio, stock)) # Agrego el nombre del producto, su precio y su stock
+            print(f"\nProducto '{nombreProducto}' agregado correctamente.")
+            
     except ValueError:
         print("Por favor, ingrese una opción que se encuentre en el menú de opciones (1-7)")
+    
+
+    
+print("\n\t Listado de productos ingresados: ")
+
+for producto in productos: # Bucle que recorre la lista para poder mostrarsela al usuario al finalizar el programa
+    nombreProducto, precio, stock = producto
+    print(f"Producto: {nombreProducto}, Precio: ${precio:.2f}, Stock: {stock} unidades")
