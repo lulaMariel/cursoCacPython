@@ -120,6 +120,6 @@ while True: # Iniciamos el bucle principal
         # elif opcion == 6: # Inicio de la opción 6
             
         #     print("\nHa seleccionado 'Reporte: Lista de productos con stock mínimo'")
-              
+
     except ValueError:
         print("Error: Por favor, ingrese una opción que se encuentre en el menú de opciones (1-7)")
