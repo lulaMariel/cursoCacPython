@@ -53,19 +53,7 @@ while True: # Iniciamos el bucle principal
 
                 nombreProducto = str(input("\nIngrese el nombre del producto nuevo: ")) # Solicito al usuario el nombre del producto nuevo
 
-                if nombreProducto == "": # Verifica que el nombre del producto no quede vacío 
-                    print("¿En algún lugar del mundo fabrican productos y no les ponen un nombre? Por favor, no sea payaso y dígame que producto desea inrgesar.") # Aviso de que el dato ingresado no es válido
-
-                elif nombreProducto.isdigit(): # El parámetro isdigit() verifica que el nombre del producto nuevo no contenga números (aprendido por chatgpt)
-                    print("Está bien, existen productos que tienen números en su nombre pero, ¿sabe que son? MARCAS y yo pedí producto. Ingrese un producto correcto.") # Aviso de que el dato ingresado no es válido
-
-                elif not nombreProducto.isalpha(): # El parámtro isalpha() verifica que el nombre del producto nuevo no contenga caracteres especiales (aprendido por chatgpt)
-                    print("Esta si no la vi nunca... ¿Caracteres especiales en los nombres de producto? ¿Quién permitió eso? Dígale que acepto la moción, pero mientras tanto... Escriba bien el nombre del producto, gracias.") # Aviso de que el dato ingresado no es válido
-
-                else:
-                    break # Sale del bucle si el nombre del producto nuevo es válido
-
-# 2. Solicitarle al usuario precio del producto (dentro del bucle de opción 1, no en el bucle principal)
+# 2. Solicitarle al usuario precio del producto 
                 while True: # Segundo bucle dentro de la opción 1 para asegurarme de que el precio sea válido
 
                     try: # Inicio el try para evitar que un error en la carga del precio del producto frene el programa
@@ -82,7 +70,7 @@ while True: # Iniciamos el bucle principal
                     except ValueError:
                         print("\n¿Se olvidaron de ponerle el precio en la góndola? Ingrese el precio por favor.") # Aviso de que el dato ingresado no es válido
 
-# 3. Solicitarle al usuario stock del producto (dentro del bucle de opción 1, no en el bucle principal)
+# 3. Solicitarle al usuario stock del producto
                 while True: # Tercer bucle dentro de la opción 1 para asegurarme de que el stock sea válido
                     
                     try: # Incio el try para evitar que un error en la carga del stock del producto frene el prorgama
@@ -102,11 +90,11 @@ while True: # Iniciamos el bucle principal
                 # Agregar el producto completo a la lista
                 productos.append((nombreProducto, precio, stock)) # Agrego el nombre del producto, su precio y su stock
                 print(f"\n¡Gracias al cielo! El producto '{nombreProducto}' fue agregado correctamente.") # Aviso de que el producto fue agregado con éxito
-            
-                # Preguntar si el usuario desea agregar otro producto
-                agregar_mas = input("¿Desea agregar otro producto? (s/n): ").strip().lower()
-                if agregar_mas != 's':
-                    break  # Salir del bucle de registro y volver al menú principal
+                
+                # Preguntar al usuario si desea agregar más productos
+                consulta = int(input("\n¿Desea agregar más productos? (1 para sí o 2 para no): "))
+                if consulta != 1:
+                    break # Salir del bucle de Registro
             
         elif opcion == 2: # Inicio de la opción 2
             
@@ -116,7 +104,6 @@ while True: # Iniciamos el bucle principal
 
             for producto in productos: # Bucle que recorre la lista para poder mostrarsela al usuario al finalizar el programa
                 print(f"\nProducto: {producto[0]} \n\tPrecio: ${producto[1]} ; Stock: {producto[2]}") # Muestra los valores ingresados por producto en la opción 1, tomando los índices de cada solicitud (nombre del producto nuevo = índice 0, precio del producto = índice 1, stock de producto = índice 2)
-                
         
         # elif opcion == 3: # Inicio de la opción 3
             
