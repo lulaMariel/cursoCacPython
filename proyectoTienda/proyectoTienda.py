@@ -6,11 +6,11 @@ while True:
     nombre = str(input("\nIngrese su nombre: "))
     
     if nombre == "":
-        print("¿Nombre vacío?")
+        print("Por favor, ingrese su nombre")
     elif nombre.isdigit():
-        print("¿Nombre con números?")
+        print("No se permiten números en el nombre. Por favor, ingrese su nombre correctamente")
     elif not nombre.isalpha():
-        print("¿Caracteres especiales?")
+        print("No se permiten caracteres especiales en el nombre. Por favor, ingrese su nombre correctamente")
     else:
         print(f"¡Hola {nombre}!")
         break
@@ -33,7 +33,7 @@ while True:
         opcion = int(input(f"\n{nombre}, por favor, ingrese una opción del menú (1-7): "))
         
         if opcion == 7:
-            print("\nSaliendo del sistema... ¡Vuelva pronto!")
+            print("\nSaliendo del sistema... ¡Gracias por usar nuestro sistema! \n¡Vuelva pronto!")
             break
         
         elif opcion == 1:
@@ -44,11 +44,11 @@ while True:
                     nombreProducto = str(input("\nIngrese el nombre del producto nuevo: "))
                 
                     if nombreProducto == "":
-                        print("¿Nombre vacío?")
+                        print("Por favor, ingrese el nombre del producto")
                     elif nombreProducto.isdigit():
-                        print("¿Nombre con números?")
+                        print("No se permiten números en el nombre del producto. Por favor, ingrese el nombre del producto correctamente")
                     elif not nombreProducto.isalpha():
-                        print("¿Caracteres especiales?")
+                        print("No se permiten caracteres especiales en el nombre de producto. Por favor, ingrese el nombre del producto correctamente")
                     else:
                         break
                 
@@ -57,22 +57,22 @@ while True:
                         precio = float(input(f"\nIngrese el precio de '{nombreProducto}': $"))
                         
                         if precio <= 0:
-                            print("\n¿Sin precio?")
+                            print("\nEl precio no puede ser menor o igual a 0. Por favor, ingese el precio del producto correctamente")
                         else:
                             break
                     except ValueError:
-                        print("\n¿Sin precio x2?")
+                        print("\nPor favor, ingrese el precio del producto")
                         
                 while True:
                     try:
                         stock = int(input(f"\nIngrese el stock de '{nombreProducto}': "))
                         
                         if stock <= 0:
-                            print("\n¿Sin stock?")
+                            print("\nEl stock no puede ser menor o igual a 0. Por favor, ingrese el stock del producto correctamente")
                         else:
                             break
                     except ValueError:
-                        print("¿Sin stock x2?")
+                        print("Por favor, ingrese el stock del producto,")
                         
                 productos.append((nombreProducto, precio, stock))
                 print(f"El producto '{nombreProducto}' fue agergado con éxito")
