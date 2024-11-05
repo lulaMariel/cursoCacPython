@@ -1,3 +1,5 @@
+# Bucles for
+
 numero = 6
 suma = 0
 
