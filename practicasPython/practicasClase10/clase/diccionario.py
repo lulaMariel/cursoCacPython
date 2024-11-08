@@ -1,6 +1,9 @@
 # Diccionario: Es como una lista, pero en lugar de usar índices (0, 1, 2, 3) para poder acceder, usamos claves y valores.
+# El dicionario trabaja con métodos.
 
-# diccionario = { # Formato
+
+# Formato:
+# diccionario = {
 #     "Clave 1": "Valor 1",
 #     "Clave 2": "Valor 2",
 #     "Clave 3": "Valor 3"
@@ -55,6 +58,8 @@ print("\tDiccionario actualiado: ")
 del edades["Joaquín"]
 print(edades)
 print("\n")
+
+# Recorrer un diccionario
 
 for nombre in edades:
     print(f"{nombre} tiene: {edades[nombre]}")
