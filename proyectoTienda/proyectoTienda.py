@@ -74,7 +74,7 @@ while True:
                     except ValueError:
                         print("Por favor, ingrese el stock del producto,")
                         
-                productos.append((nombreProducto, precio, stock))
+                productos.append({"nombre": nombreProducto, "precio": precio, "stock": stock}) # Agrego los productos a un DICCIONARIO en vez de a una TUPLA para que se puedan modificar en la opción 3.
                 print(f"El producto '{nombreProducto}' fue agergado con éxito")
                 
                 otroProducto = int(input("¿Desea agregar otro producto? (1 para sí o 2 para no): "))
@@ -89,8 +89,40 @@ while True:
             for producto in productos:
                 print(f"\nProducto: {producto[0]} \n\tPrecio: ${producto[1]} ; Stock: {producto[2]}")
         
-        elif opcion == 3:
-            print("\nHa seleccionado 'Actualización: Modificar la cantidad en stock del producto'")
+        # elif opcion == 3:
+        #     print("\nHa seleccionado 'Actualización: Modificar la cantidad en stock del producto'")
+
+        #     # Primero necesito saber sobre qué producto se va a hacer la actualización
+        #     vendido = input("Ingrese el nombre del producto que desea actualizar: ")
+
+        #     # Variable de control para indicar si el producto se encontró
+        #     producto_encontrado = False
+
+        #     for producto in productos:
+        #         if producto["nombre"] == vendido:
+        #             producto_encontrado = True
+        #             # Solicitud de cantidad vendida y actualización de stock
+        #             while True:
+        #                 try:
+        #                     cantidadVendida = int(input(f"Ingrese la cantidad vendida de {producto['nombre']}: "))
+        #                     if cantidadVendida <= 0:
+        #                         print("Por favor, ingrese un valor mayor a 0.")
+        #                     elif cantidadVendida > producto["stock"]:
+        #                         print("No hay stock suficiente para esta cantidad, intente con un valor menor.")
+        #                     else:  # Actualización de stock
+        #                         producto["stock"] -= cantidadVendida
+        #                         print(f"Stock actualizado: Nueva cantidad de stock de {producto['nombre']}: {producto['stock']}")
+        #                         print("Producto actualizado con éxito.")
+        #                     eliminarMas = input("¿Desea actualizar más productos? (S para sí o N para no): ")
+        #                     if eliminarMas.lower() != "s":
+        #                         break
+        #                 except ValueError:
+        #                     print("Por favor, ingrese un número válido.")
+        #             break  # Salir del bucle si se encontró el producto y se actualizó
+
+        #     if not producto_encontrado:
+        #         print("Producto no encontrado, vuelva a intentarlo.")
+
         elif opcion == 4:
             print("\nHa seleccionado 'Eliminacióon: Dar de baja algún producto'")
         elif opcion == 5:
