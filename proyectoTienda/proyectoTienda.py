@@ -89,6 +89,7 @@ while True:
             for producto in productos:
                 print(f"\nProducto: {producto[0]} \n\tPrecio: ${producto[1]} ; Stock: {producto[2]}")
         
+        # REVER
         # elif opcion == 3:
         #     print("\nHa seleccionado 'Actualización: Modificar la cantidad en stock del producto'")
 
