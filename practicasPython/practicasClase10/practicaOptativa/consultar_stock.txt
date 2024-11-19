@@ -1,0 +1,6 @@
+Notas del programa:
+
+1. Crear diccionario con clave-valor (nombre de los productos y cantidades disponbiles en stock);
+2. Input para pedirle al usuario los nombres de los productos;
+    a. Si el producto no existe, mostrar un "error" de producto no encontrado;
+    b. Si el producto existe, mostrar el stock.
