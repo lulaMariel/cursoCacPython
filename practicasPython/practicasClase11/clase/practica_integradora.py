@@ -1,4 +1,4 @@
-# Función para calificaciones y promedios
+# Función para calificaciones y promedios (ver si puedo unir como clave-valor)
 
 print("")
 
