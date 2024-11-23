@@ -1,0 +1,6 @@
+El proyectoTienda1 es sin funciones.
+El proyectoTienda2 es con funciones.
+El proyectoTienda3 es con funciones Y base de datos (o debería)
+
+General:
+
