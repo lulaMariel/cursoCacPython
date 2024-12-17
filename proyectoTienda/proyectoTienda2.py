@@ -105,7 +105,7 @@ def actualizar_producto(cursor, conexion):
         return
 
     # Si el código existe, le muestro cuál es el producto
-    print(f"Producto actual: Código: {producto[0]}, Nombre: {producto[1]}, Precio: {producto[2]}, Stock: {producto[3]}, Categoría: {producto[4]}")
+    print(f"\nProducto actual: Código: {producto[0]}, Nombre: {producto[1]}, Precio: {producto[2]}, Stock: {producto[3]}, Categoría: {producto[4]}\n")
 
     # Para actualizar el nombre del producto
     nombre = input("Ingrese el nuevo nombre del producto (dejar vacío para mantener el actual): ") or producto[1]
@@ -178,7 +178,7 @@ def buscar_producto(cursor):
     resultados = cursor.fetchall() # Recupera todas las filas que cumplen con la consulta SQL y las guarda en la variable
     if resultados:
         for codigo, nombre, precio, cantidad, categoria in resultados:
-            print(Fore.CYAN, f"Código: {codigo}, Nombre: {nombre}, Precio: ${precio:.2f}, Stock: {cantidad}, Categoría: {categoria}\n")
+            print(Fore.CYAN, f"\nCódigo: {codigo}, Nombre: {nombre}, Precio: ${precio:.2f}, Stock: {cantidad}, Categoría: {categoria}")
     else:
         print("\nNo se encontraron productos.")
 
