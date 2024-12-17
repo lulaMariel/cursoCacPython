@@ -2,15 +2,10 @@ import os
 import sqlite3
 from colorama import Fore, Style
 
-# Funciones del sistema de inventario
+# Creación y conexión de la base de datos
 
-# Limpiar la terminal
-def limpiar_terminal():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-# Conexión y creación de la base de datos
-def inicializar_base_datos():
-    conexion = sqlite3.connect("inventario.db")
+def iniciar_bbdd():
+    conexion = sqlite3.connect("inventario.db") # Nombre de la bbdd
     cursor = conexion.cursor()
     cursor.execute('''CREATE TABLE IF NOT EXISTS productos (
                         codigo TEXT PRIMARY KEY,
@@ -19,8 +14,14 @@ def inicializar_base_datos():
                         cantidad INTEGER NOT NULL,
                         categoria TEXT DEFAULT 'Sin categoría'
                     )''')
-    conexion.commit()
+    conexion.commit() # Confirma los cambios realizados
     return conexion, cursor
+
+# Funciones del sistema de inventario
+
+# Función para limpiar la terminal
+def limpiar_terminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # Función para mostrar el menú
 def mostrar_menu():
@@ -38,6 +39,8 @@ def mostrar_menu():
 # Función para registrar productos
 def registrar_producto(cursor, conexion):
     print(Fore.RED, Style.BRIGHT, "\n\t••••• Registrar Producto •••••\n")
+    
+    # Condicional para que el código no pueda quedar vacío ni se repita
     while True:
         codigo = input("Ingrese el código del producto: ")
         if not codigo:
@@ -49,11 +52,13 @@ def registrar_producto(cursor, conexion):
             else:
                 break
 
+    # Nombre junto a un condicional para que no pueda quedar vacío
     nombre = input("Ingrese el nombre del producto: ").strip()
     while not nombre:
         print("El nombre no puede estar vacío.\n")
         nombre = input("Ingrese el nombre del producto: ").strip()
 
+    # Condicional para que el precio sea válido
     while True:
         try:
             precio = float(input("Ingrese el precio del producto: "))
@@ -64,6 +69,7 @@ def registrar_producto(cursor, conexion):
         except ValueError:
             print("Por favor, ingrese un valor numérico válido para el precio.\n")
 
+    # Condicional para que la cantidad sea válida
     while True:
         try:
             cantidad = int(input("Ingrese la cantidad en stock: "))
@@ -74,13 +80,15 @@ def registrar_producto(cursor, conexion):
         except ValueError:
             print("Por favor, ingrese un número entero válido para la cantidad.\n")
 
+    # Categoría junto a un condicional para que no pueda quedar vacío
     categoria = input("Ingrese la categoría del producto: ").strip()
     while not nombre:
         print("La categoría no puede estar vacía.\n")
         categoria = input("Ingrese la categoría del producto: ").strip()
 
+    # Consulta SQL para que inserte los datos en la bbdd
     cursor.execute("INSERT INTO productos VALUES (?, ?, ?, ?, ?)", (codigo, nombre, precio, cantidad, categoria))
-    conexion.commit()
+    conexion.commit() # Confirma los cambios realizados
     print("\n✔ Producto registrado con éxito.")
 
 # Función para actualizar productos
@@ -88,16 +96,21 @@ def actualizar_producto(cursor, conexion):
     print(Fore.RED, Style.BRIGHT, "\n\t••••• Actualizar Producto •••••\n")
     codigo = input("Ingrese el código del producto que desea actualizar: ")
 
+    # Consulta SQL para que busque y traiga el producto con el código ingresado
     cursor.execute("SELECT * FROM productos WHERE codigo = ?", (codigo,))
     producto = cursor.fetchone()
 
-    if not producto:
+    if not producto: # Si el código no existe
         print("El producto no existe.")
         return
 
+    # Si el código existe, le muestro cuál es el producto
     print(f"Producto actual: Código: {producto[0]}, Nombre: {producto[1]}, Precio: {producto[2]}, Stock: {producto[3]}, Categoría: {producto[4]}")
 
+    # Para actualizar el nombre del producto
     nombre = input("Ingrese el nuevo nombre del producto (dejar vacío para mantener el actual): ") or producto[1]
+
+    # Condional para actualizar el precio del producto y que el mismo sea válido
     while True:
         try:
             precio = input("Ingrese el nuevo precio del producto (dejar vacío para mantener el actual): ")
@@ -109,6 +122,7 @@ def actualizar_producto(cursor, conexion):
         except ValueError:
             print("Por favor, ingrese un valor numérico válido para el precio.")
 
+    # Condicional para actualizar la cantidad del producto y que la misma sea válida
     while True:
         try:
             cantidad = input("Ingrese la nueva cantidad en stock (dejar vacío para mantener el actual): ")
@@ -120,11 +134,12 @@ def actualizar_producto(cursor, conexion):
         except ValueError:
             print("Por favor, ingrese un número entero válido para la cantidad.")
 
+    # Para actualizar la categoría del producto
     categoria = input("Ingrese la nueva categoría del producto (dejar vacío para mantener el actual): ") or producto[4]
 
-    cursor.execute("UPDATE productos SET nombre = ?, precio = ?, cantidad = ?, categoria = ? WHERE codigo = ?", 
-                (nombre, precio, cantidad, categoria, codigo))
-    conexion.commit()
+    # Consulta SQL para que actualice los datos en la bbdd
+    cursor.execute("UPDATE productos SET nombre = ?, precio = ?, cantidad = ?, categoria = ? WHERE codigo = ?", (nombre, precio, cantidad, categoria, codigo))
+    conexion.commit() # Confirma los cambios realizados
     print("\n✔ Producto actualizado con éxito.")
 
 # Función para eliminar productos
@@ -132,9 +147,10 @@ def eliminar_producto(cursor, conexion):
     print(Fore.RED, Style.BRIGHT, "\n\t••••• Eliminar Producto •••••\n")
     codigo = input("Ingrese el código del producto que desea eliminar: ")
 
+    # Consulta SQL para que busque y elimine los datos del código ingresado
     cursor.execute("DELETE FROM productos WHERE codigo = ?", (codigo,))
-    if cursor.rowcount > 0:
-        conexion.commit()
+    if cursor.rowcount > 0: # Verifica si al menos una fila fue afectada
+        conexion.commit() # Confirma los cambios realizados
         print("\n✔ Producto eliminado con éxito.")
     else:
         print("\nEl producto no existe.")
@@ -142,11 +158,13 @@ def eliminar_producto(cursor, conexion):
 # Función para mostrar productos
 def mostrar_productos(cursor):
     print(Fore.RED, Style.BRIGHT, "\n\t••••• Listado de Productos •••••\n")
+
+    # Consulta SQL para que busque y traiga todos los datos de la bbdd
     cursor.execute("SELECT * FROM productos")
-    productos = cursor.fetchall()
+    productos = cursor.fetchall() # Recupera todas las filas que cumplen con la consulta SQL y las guarda en la variable
     if productos:
         for codigo, nombre, precio, cantidad, categoria in productos:
-            print(Fore.CYAN, f"Código: {codigo}, Nombre: {nombre}, Precio: ${precio:.2f}, Stock: {cantidad}, Cateogoría: {categoria}")
+            print(Fore.CYAN, f"Código: {codigo}, Nombre: {nombre}, Precio: ${precio:.2f}, Stock: {cantidad}, Cateogoría: {categoria}\n")
     else:
         print("El inventario está vacío.")
 
@@ -154,51 +172,68 @@ def mostrar_productos(cursor):
 def buscar_producto(cursor):
     print(Fore.RED, Style.BRIGHT, "\n\t••••• Buscar Producto •••••\n")
     busqueda = input("Ingrese el código o nombre del producto: ").lower()
-    cursor.execute("SELECT * FROM productos WHERE LOWER(codigo) LIKE ? OR LOWER(nombre) LIKE ?", 
-                (f"%{busqueda}%", f"%{busqueda}%"))
-    resultados = cursor.fetchall()
+
+    # Consulta SQL para que busque y traiga los datos del código o nombre ingresado
+    cursor.execute("SELECT * FROM productos WHERE LOWER(codigo) LIKE ? OR LOWER(nombre) LIKE ?", (f"%{busqueda}%", f"%{busqueda}%"))
+    resultados = cursor.fetchall() # Recupera todas las filas que cumplen con la consulta SQL y las guarda en la variable
     if resultados:
         for codigo, nombre, precio, cantidad, categoria in resultados:
-            print(Fore.CYAN, f"Código: {codigo}, Nombre: {nombre}, Precio: ${precio:.2f}, Stock: {cantidad}, Categoría: {categoria}")
+            print(Fore.CYAN, f"Código: {codigo}, Nombre: {nombre}, Precio: ${precio:.2f}, Stock: {cantidad}, Categoría: {categoria}\n")
     else:
         print("\nNo se encontraron productos.")
 
 # Función para generar reporte de bajo stock
 def generar_reporte(cursor):
     print(Fore.RED, Style.BRIGHT, "\n\t••••• Reporte de Stock Bajo •••••\n")
+
+    # Try/except para controlar que el número ingresado sea válido
     try:
         minimo = int(input("Ingrese la cantidad mínima de stock: "))
+
+        # Consulta SQL para que busque y traiga los productos cuya cantidad sean menores al número ingresado
         cursor.execute("SELECT * FROM productos WHERE cantidad < ?", (minimo,))
-        productos = cursor.fetchall()
+        productos = cursor.fetchall() # Recupera todas las filas que cumplen con la consulta SQL y las guarda en la variable
         if productos:
             for codigo, nombre, precio, cantidad, categoria in productos:
-                print(Fore.CYAN, f"Código: {codigo}, Nombre: {nombre}, Precio: ${precio:.2f}, Stock: {cantidad}, Categoría: {categoria}")
+                print(Fore.CYAN, f"Código: {codigo}, Nombre: {nombre}, Precio: ${precio:.2f}, Stock: {cantidad}, Categoría: {categoria}\n")
         else:
             print("\nNo hay productos con stock bajo.")
     except ValueError:
         print("Por favor, ingrese un número válido.")
 
+# Función para vaciar el inventario completo
 def vaciar_inventario(cursor, conexion):
     print(Fore.RED, Style.BRIGHT, "\n\t••••• Vaciar Inventario •••••\n")
-    
+
+    # Consulta SQL para que busque si hay elementos en la tabla
     cursor.execute("SELECT COUNT(*) FROM productos")
-    inventario = cursor.fetchone()[0]
-    
+    inventario = cursor.fetchone()[0] # Recupera una fila que cumple con la consulta SQL y, si hay, las guarda en la variable, sino devuelve None
+
+    # Condicional para chequear que el inventario no esté vacío
     if inventario == 0:
         print("No hay productos en el inventario.")
         return 
+
+    # Si el inventario no está vacío, advertencia
     confirm_delete = input("CUIDADO: ¿Está seguro que desea vaciar el inventario COMPLETO? (S/N): ").strip().lower()
-    
+
+    # Si el usuario elige S
     if confirm_delete == "s":
+        
+        # Consulta SQL para borrar todos los datos de la base de datos
         cursor.execute("DELETE FROM productos")
-        conexion.commit()
+        conexion.commit() # Confirma los cambios realizados
         print("\n✔ Todos los productos han sido eliminados del inventario.")
     else:
         print("\n❌ Operación cancelada. El inventario no ha sido modificado.")
 
 # Función principal
 def main():
-    conexion, cursor = inicializar_base_datos()
+
+    # Incio la base de datos
+    conexion, cursor = iniciar_bbdd()
+
+    # Condicional que comienza una vez iniciada la base de datos
     while True:
         limpiar_terminal()
         mostrar_menu()
@@ -224,5 +259,6 @@ def main():
             print("Opción inválida. Intente de nuevo.")
         input("\nPresione Enter para continuar...")
 
+# Ejecuta el código contenido en def main()
 if __name__ == "__main__":
     main()
