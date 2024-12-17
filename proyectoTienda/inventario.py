@@ -2,10 +2,16 @@ import os
 import sqlite3
 from colorama import Fore, Style
 
-# Creación y conexión de la base de datos
+# Creación de la bbdd en la carpeta en la que estamos
+def crear_bbdd():
+    directorio_actual = os.path.dirname(os.path.abspath(__file__)) # Carpeta actual
+    ruta_bbdd = os.path.join(directorio_actual, 'inventario.db') # Nombre de la bbdd
+    return sqlite3.connect(ruta_bbdd) # Nos devuelve la conexión a la bbdd creada con el nombre indicado
 
+# Conexión de la bbdd
 def iniciar_bbdd():
-    conexion = sqlite3.connect("inventario.db") # Nombre de la bbdd
+    crear_bbdd()
+    conexion = crear_bbdd()
     cursor = conexion.cursor()
     cursor.execute('''CREATE TABLE IF NOT EXISTS productos (
                         codigo TEXT PRIMARY KEY,
